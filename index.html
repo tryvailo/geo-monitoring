@@ -10,11 +10,15 @@
             theme: {
                 extend: {
                     colors: {
-                        'navy-dark': '#0a0e27',
-                        'navy-light': '#141b3c',
-                        'navy-card': '#1e293b',
-                        'blue-accent': '#3b82f6',
-                        'blue-bright': '#2563eb'
+                        'gray-50': '#f8fafc',
+                        'gray-100': '#f1f5f9',
+                        'gray-200': '#e2e8f0',
+                        'gray-600': '#475569',
+                        'gray-700': '#334155',
+                        'gray-800': '#1e293b',
+                        'gray-900': '#0f172a',
+                        'blue-500': '#3b82f6',
+                        'blue-600': '#2563eb'
                     }
                 }
             }
@@ -22,23 +26,27 @@
     </script>
     <style>
         .gradient-text {
-            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+        .gradient-button {
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
         }
         .dashboard-card {
             transition: all 0.3s ease;
         }
         .dashboard-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         .feature-card {
             transition: all 0.3s ease;
         }
         .feature-card:hover {
             transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border-color: #3b82f6;
         }
         .fade-in {
@@ -55,27 +63,32 @@
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
+        .icon-outline {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+        }
     </style>
 </head>
-<body class="bg-navy-dark text-white">
+<body class="bg-white text-gray-800">
     <!-- Header -->
-    <header class="fixed w-full top-0 bg-navy-dark/90 backdrop-blur-lg border-b border-navy-light z-50">
+    <header class="fixed w-full top-0 bg-white/90 backdrop-blur-lg border-b border-gray-200 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <div class="text-xl font-bold gradient-text">ProductTracker AI</div>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-gray-300 hover:text-white transition-colors">Features</a>
-                    <a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
-                    <a href="#demo" class="text-gray-300 hover:text-white transition-colors">Demo</a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Login</a>
+                    <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="#demo" class="text-gray-600 hover:text-gray-900 transition-colors">Demo</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Login</a>
                 </nav>
-                <button class="bg-blue-accent hover:bg-blue-bright px-4 py-2 rounded-lg font-medium transition-colors">
+                <button class="gradient-button hover:opacity-90 px-4 py-2 rounded-lg font-medium text-white transition-all">
                     Start Free Trial
                 </button>
                 <!-- Mobile menu button -->
-                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                <button class="md:hidden text-gray-800" onclick="toggleMobileMenu()">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -85,111 +98,129 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center fade-in">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900">
                     AI search analytics for <span class="gradient-text">SEO teams</span>
                 </h1>
-                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-normal">
                     Track your products and services visibility across ChatGPT, Perplexity, and Claude. See which products get recommended, when, and why.
                 </p>
                 
                 <!-- Value Props -->
                 <div class="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
-                    <div class="flex items-center justify-center md:justify-start space-x-3">
-                        <span class="text-2xl">📊</span>
-                        <span class="text-sm md:text-base">Track product mentions across all AI platforms</span>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <div class="w-8 h-8 text-blue-600">
+                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm md:text-base text-gray-700 font-medium">Track product mentions across all AI platforms</span>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center md:justify-start space-x-3">
-                        <span class="text-2xl">🔍</span>
-                        <span class="text-sm md:text-base">Monitor service recommendations in AI responses</span>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <div class="w-8 h-8 text-blue-600">
+                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                    <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm md:text-base text-gray-700 font-medium">Monitor service recommendations in AI responses</span>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-center md:justify-start space-x-3">
-                        <span class="text-2xl">📈</span>
-                        <span class="text-sm md:text-base">Analyze competitor products performance</span>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
+                        <div class="flex items-center justify-center md:justify-start space-x-3">
+                            <div class="w-8 h-8 text-blue-600">
+                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                    <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm md:text-base text-gray-700 font-medium">Analyze competitor products performance</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- CTAs -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                    <button class="bg-blue-accent hover:bg-blue-bright px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                    <button class="gradient-button hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg text-white transition-all transform hover:scale-105 shadow-md">
                         Start Free Trial
                     </button>
-                    <button class="border border-blue-accent text-blue-accent hover:bg-blue-accent hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all">
+                    <button class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all shadow-sm">
                         Watch Demo
                     </button>
                 </div>
 
                 <!-- Hero Dashboard Mockup -->
-                <div class="bg-navy-card rounded-2xl p-6 border border-navy-light max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg max-w-5xl mx-auto">
                     <div class="mb-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold">Product Performance Dashboard</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Product Performance Dashboard</h3>
                             <div class="flex space-x-2">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/openai/openai-original.svg" alt="ChatGPT" class="w-6 h-6">
-                                <div class="w-6 h-6 bg-purple-500 rounded-sm flex items-center justify-center text-xs font-bold">P</div>
-                                <div class="w-6 h-6 bg-orange-500 rounded-sm flex items-center justify-center text-xs font-bold">C</div>
+                                <div class="w-6 h-6 bg-green-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">G</div>
+                                <div class="w-6 h-6 bg-purple-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">P</div>
+                                <div class="w-6 h-6 bg-orange-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">C</div>
                             </div>
                         </div>
                         
                         <!-- Product Cards -->
                         <div class="grid md:grid-cols-3 gap-4 mb-6">
-                            <div class="dashboard-card bg-navy-light rounded-lg p-4 border border-gray-700">
+                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium">iPhone 15 Pro</h4>
-                                    <span class="text-green-400 text-sm">↗ +12%</span>
+                                    <h4 class="font-medium text-gray-900">iPhone 15 Pro</h4>
+                                    <span class="text-green-500 text-sm font-medium">↗ +12%</span>
                                 </div>
-                                <div class="text-2xl font-bold text-blue-accent animate-counter">245</div>
-                                <div class="text-sm text-gray-400">mentions this week</div>
+                                <div class="text-2xl font-bold text-blue-600 animate-counter">245</div>
+                                <div class="text-sm text-gray-500">mentions this week</div>
                             </div>
-                            <div class="dashboard-card bg-navy-light rounded-lg p-4 border border-gray-700">
+                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium">Samsung Galaxy S24</h4>
-                                    <span class="text-green-400 text-sm">↗ +8%</span>
+                                    <h4 class="font-medium text-gray-900">Samsung Galaxy S24</h4>
+                                    <span class="text-green-500 text-sm font-medium">↗ +8%</span>
                                 </div>
-                                <div class="text-2xl font-bold text-blue-accent animate-counter">189</div>
-                                <div class="text-sm text-gray-400">mentions this week</div>
+                                <div class="text-2xl font-bold text-blue-600 animate-counter">189</div>
+                                <div class="text-sm text-gray-500">mentions this week</div>
                             </div>
-                            <div class="dashboard-card bg-navy-light rounded-lg p-4 border border-gray-700">
+                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium">Google Pixel 8</h4>
-                                    <span class="text-red-400 text-sm">↘ -3%</span>
+                                    <h4 class="font-medium text-gray-900">Google Pixel 8</h4>
+                                    <span class="text-red-500 text-sm font-medium">↘ -3%</span>
                                 </div>
-                                <div class="text-2xl font-bold text-blue-accent animate-counter">156</div>
-                                <div class="text-sm text-gray-400">mentions this week</div>
+                                <div class="text-2xl font-bold text-blue-600 animate-counter">156</div>
+                                <div class="text-sm text-gray-500">mentions this week</div>
                             </div>
                         </div>
 
                         <!-- Mini Chart -->
-                        <div class="bg-navy-light rounded-lg p-4 border border-gray-700">
-                            <h4 class="font-medium mb-3">AI Platform Performance</h4>
-                            <div class="space-y-2">
+                        <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                            <h4 class="font-medium mb-3 text-gray-900">AI Platform Performance</h4>
+                            <div class="space-y-3">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm">ChatGPT</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-32 bg-gray-700 rounded-full h-2">
-                                            <div class="bg-blue-accent h-2 rounded-full" style="width: 78%"></div>
+                                    <span class="text-sm text-gray-700">ChatGPT</span>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-32 bg-gray-200 rounded-full h-2">
+                                            <div class="bg-blue-600 h-2 rounded-full" style="width: 78%"></div>
                                         </div>
-                                        <span class="text-sm text-gray-400">78%</span>
+                                        <span class="text-sm text-gray-600 font-medium">78%</span>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm">Perplexity</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-32 bg-gray-700 rounded-full h-2">
+                                    <span class="text-sm text-gray-700">Perplexity</span>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-32 bg-gray-200 rounded-full h-2">
                                             <div class="bg-purple-500 h-2 rounded-full" style="width: 65%"></div>
                                         </div>
-                                        <span class="text-sm text-gray-400">65%</span>
+                                        <span class="text-sm text-gray-600 font-medium">65%</span>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm">Claude</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-32 bg-gray-700 rounded-full h-2">
+                                    <span class="text-sm text-gray-700">Claude</span>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-32 bg-gray-200 rounded-full h-2">
                                             <div class="bg-orange-500 h-2 rounded-full" style="width: 52%"></div>
                                         </div>
-                                        <span class="text-sm text-gray-400">52%</span>
+                                        <span class="text-sm text-gray-600 font-medium">52%</span>
                                     </div>
                                 </div>
                             </div>
@@ -201,35 +232,41 @@
     </section>
 
     <!-- Problem Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-navy-light">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Your products are invisible in AI search results</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Your products are invisible in AI search results</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <span class="text-red-400 mt-1">•</span>
-                            <span><strong>60% of purchase decisions</strong> now start with AI assistants like ChatGPT</span>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <span class="text-red-400 mt-1">•</span>
-                            <span>Your <strong>best-selling products</strong> never get mentioned in AI recommendations</span>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <span class="text-red-400 mt-1">•</span>
-                            <span><strong>Competitors' products</strong> appear in AI responses while yours don't</span>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <span class="text-red-400 mt-1">•</span>
-                            <span><strong>No visibility</strong> into which products AI recommends and why</span>
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span class="text-gray-700"><strong class="text-gray-900">60% of purchase decisions</strong> now start with AI assistants like ChatGPT</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span class="text-gray-700">Your <strong class="text-gray-900">best-selling products</strong> never get mentioned in AI recommendations</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <span class="text-red-400 mt-1">•</span>
-                            <span>Traditional SEO tools <strong>don't track product mentions</strong> in AI platforms</span>
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span class="text-gray-700"><strong class="text-gray-900">Competitors' products</strong> appear in AI responses while yours don't</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span class="text-gray-700"><strong class="text-gray-900">No visibility</strong> into which products AI recommends and why</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span class="text-gray-700">Traditional SEO tools <strong class="text-gray-900">don't track product mentions</strong> in AI platforms</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,20 +274,20 @@
             
             <!-- Split comparison visual -->
             <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700">
-                    <h3 class="font-semibold mb-4 text-green-400">Google Search Results</h3>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                    <h3 class="font-semibold mb-4 text-green-600">Google Search Results</h3>
                     <div class="space-y-3">
-                        <div class="bg-navy-dark p-3 rounded border-l-4 border-blue-accent">
-                            <div class="text-sm text-blue-accent">Your Product - #3 Position</div>
-                            <div class="text-xs text-gray-400">Best wireless headphones 2024 - YourBrand Pro</div>
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-600">
+                            <div class="text-sm text-blue-600 font-medium">Your Product - #3 Position</div>
+                            <div class="text-xs text-gray-500 mt-1">Best wireless headphones 2024 - YourBrand Pro</div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700">
-                    <h3 class="font-semibold mb-4 text-red-400">ChatGPT Response</h3>
-                    <div class="bg-navy-dark p-3 rounded">
-                        <div class="text-sm italic text-gray-300">"For the best wireless headphones in 2024, I'd recommend the Sony WH-1000XM5, Bose QuietComfort 45, or Apple AirPods Max..."</div>
-                        <div class="text-xs text-red-400 mt-2">❌ Your product not mentioned</div>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+                    <h3 class="font-semibold mb-4 text-red-600">ChatGPT Response</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="text-sm italic text-gray-700">"For the best wireless headphones in 2024, I'd recommend the Sony WH-1000XM5, Bose QuietComfort 45, or Apple AirPods Max..."</div>
+                        <div class="text-xs text-red-500 mt-3 font-medium">❌ Your product not mentioned</div>
                     </div>
                 </div>
             </div>
@@ -258,67 +295,133 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 px-4 sm:px-6 lg:px-8">
+    <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">The first product visibility analytics platform for AI search</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Monitor, analyze, and optimize how your products perform in the new era of AI-powered search</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">The first product visibility analytics platform for AI search</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Monitor, analyze, and optimize how your products perform in the new era of AI-powered search</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="feature-card bg-navy-card rounded-xl p-8 border border-gray-700">
+                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
                     <div class="flex items-center space-x-3 mb-4">
-                        <span class="text-3xl">🎯</span>
-                        <h3 class="text-xl font-semibold">Product Mention Tracking</h3>
+                        <div class="w-12 h-12 text-blue-600">
+                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">Product Mention Tracking</h3>
                     </div>
-                    <p class="text-gray-300 mb-4">See when and where your products get mentioned</p>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>• Real-time tracking across ChatGPT, Perplexity, Claude</li>
-                        <li>• Monitor specific product/service mentions by name</li>
-                        <li>• Track mention frequency and context analysis</li>
-                        <li>• Historical data and trending patterns</li>
+                    <p class="text-gray-600 mb-4">See when and where your products get mentioned</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Real-time tracking across ChatGPT, Perplexity, Claude</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Monitor specific product/service mentions by name</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track mention frequency and context analysis</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Historical data and trending patterns</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="feature-card bg-navy-card rounded-xl p-8 border border-gray-700">
+                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
                     <div class="flex items-center space-x-3 mb-4">
-                        <span class="text-3xl">🕵️</span>
-                        <h3 class="text-xl font-semibold">Competitive Product Intelligence</h3>
+                        <div class="w-12 h-12 text-blue-600">
+                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">Competitive Product Intelligence</h3>
                     </div>
-                    <p class="text-gray-300 mb-4">Analyze how competitor products perform in AI search</p>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>• Compare your products vs competitors in AI responses</li>
-                        <li>• See which product categories get most AI recommendations</li>
-                        <li>• Identify gaps where your products should appear</li>
-                        <li>• Track market share in AI mention volume</li>
+                    <p class="text-gray-600 mb-4">Analyze how competitor products perform in AI search</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Compare your products vs competitors in AI responses</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>See which product categories get most AI recommendations</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Identify gaps where your products should appear</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track market share in AI mention volume</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="feature-card bg-navy-card rounded-xl p-8 border border-gray-700">
+                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
                     <div class="flex items-center space-x-3 mb-4">
-                        <span class="text-3xl">📈</span>
-                        <h3 class="text-xl font-semibold">Query Performance Analysis</h3>
+                        <div class="w-12 h-12 text-blue-600">
+                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                <path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">Query Performance Analysis</h3>
                     </div>
-                    <p class="text-gray-300 mb-4">Understand which searches mention your products</p>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>• Track performance across thousands of relevant queries</li>
-                        <li>• See which product features get highlighted by AI</li>
-                        <li>• Monitor seasonal trends and emerging opportunities</li>
-                        <li>• Identify underperforming product categories</li>
+                    <p class="text-gray-600 mb-4">Understand which searches mention your products</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track performance across thousands of relevant queries</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>See which product features get highlighted by AI</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Monitor seasonal trends and emerging opportunities</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Identify underperforming product categories</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="feature-card bg-navy-card rounded-xl p-8 border border-gray-700">
+                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
                     <div class="flex items-center space-x-3 mb-4">
-                        <span class="text-3xl">💡</span>
-                        <h3 class="text-xl font-semibold">Recommendation Context Analysis</h3>
+                        <div class="w-12 h-12 text-blue-600">
+                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                                <path d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189 6.01 6.01 0 001.041-.397 2.25 2.25 0 00.045-4.006A6.01 6.01 0 0012 7.5c-.838 0-1.652.145-2.408.408a2.25 2.25 0 00-.045 4.006c.315.194.674.357 1.041.397.427.092.916.151 1.412.189V18M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900">Recommendation Context Analysis</h3>
                     </div>
-                    <p class="text-gray-300 mb-4">Understand why AI recommends certain products</p>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>• Analyze the context when your products get mentioned</li>
-                        <li>• See what product attributes AI systems prioritize</li>
-                        <li>• Track recommendation patterns and triggers</li>
-                        <li>• Understand positioning vs competitors</li>
+                    <p class="text-gray-600 mb-4">Understand why AI recommends certain products</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Analyze the context when your products get mentioned</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>See what product attributes AI systems prioritize</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track recommendation patterns and triggers</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Understand positioning vs competitors</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -326,30 +429,30 @@
     </section>
 
     <!-- Dashboard Preview Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-navy-light">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Monitor your entire product catalog's AI visibility</h2>
-                <p class="text-xl text-gray-300">Get comprehensive insights into how AI systems recommend your products</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Monitor your entire product catalog's AI visibility</h2>
+                <p class="text-xl text-gray-600">Get comprehensive insights into how AI systems recommend your products</p>
             </div>
 
-            <div class="bg-navy-card rounded-2xl p-8 border border-gray-700">
+            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
                 <!-- Dashboard Header -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                    <h3 class="text-2xl font-semibold mb-4 md:mb-0">Product Analytics Dashboard</h3>
+                    <h3 class="text-2xl font-semibold mb-4 md:mb-0 text-gray-900">Product Analytics Dashboard</h3>
                     <div class="flex flex-wrap gap-3">
-                        <select class="bg-navy-dark border border-gray-600 rounded px-3 py-2 text-sm">
+                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>Last 7 days</option>
                             <option>Last 30 days</option>
                             <option>Last 90 days</option>
                         </select>
-                        <select class="bg-navy-dark border border-gray-600 rounded px-3 py-2 text-sm">
+                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>All Platforms</option>
                             <option>ChatGPT</option>
                             <option>Perplexity</option>
                             <option>Claude</option>
                         </select>
-                        <select class="bg-navy-dark border border-gray-600 rounded px-3 py-2 text-sm">
+                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>All Categories</option>
                             <option>Smartphones</option>
                             <option>Laptops</option>
@@ -360,37 +463,37 @@
 
                 <!-- Key Metrics -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-accent animate-counter">1,247</div>
-                        <div class="text-sm text-gray-400">Total Mentions</div>
-                        <div class="text-green-400 text-xs">+18% vs last week</div>
+                    <div class="text-center bg-gray-50 rounded-lg p-4">
+                        <div class="text-3xl font-bold text-blue-600 animate-counter">1,247</div>
+                        <div class="text-sm text-gray-600 font-medium">Total Mentions</div>
+                        <div class="text-green-500 text-xs font-medium">+18% vs last week</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-accent animate-counter">23</div>
-                        <div class="text-sm text-gray-400">Products Tracked</div>
-                        <div class="text-blue-400 text-xs">Active monitoring</div>
+                    <div class="text-center bg-gray-50 rounded-lg p-4">
+                        <div class="text-3xl font-bold text-blue-600 animate-counter">23</div>
+                        <div class="text-sm text-gray-600 font-medium">Products Tracked</div>
+                        <div class="text-blue-600 text-xs font-medium">Active monitoring</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-accent animate-counter">67%</div>
-                        <div class="text-sm text-gray-400">Visibility Score</div>
-                        <div class="text-green-400 text-xs">+5% improvement</div>
+                    <div class="text-center bg-gray-50 rounded-lg p-4">
+                        <div class="text-3xl font-bold text-blue-600 animate-counter">67%</div>
+                        <div class="text-sm text-gray-600 font-medium">Visibility Score</div>
+                        <div class="text-green-500 text-xs font-medium">+5% improvement</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-accent animate-counter">5</div>
-                        <div class="text-sm text-gray-400">Competitors</div>
-                        <div class="text-gray-400 text-xs">Benchmarked</div>
+                    <div class="text-center bg-gray-50 rounded-lg p-4">
+                        <div class="text-3xl font-bold text-blue-600 animate-counter">5</div>
+                        <div class="text-sm text-gray-600 font-medium">Competitors</div>
+                        <div class="text-gray-500 text-xs font-medium">Benchmarked</div>
                     </div>
                 </div>
 
                 <!-- Product Table -->
-                <div class="bg-navy-dark rounded-lg overflow-hidden">
-                    <div class="p-4 border-b border-gray-700">
-                        <h4 class="font-semibold">Top Performing Products</h4>
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <div class="p-4 border-b border-gray-200 bg-gray-50">
+                        <h4 class="font-semibold text-gray-900">Top Performing Products</h4>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full">
-                            <thead class="bg-navy-light">
-                                <tr class="text-left text-sm text-gray-400">
+                            <thead class="bg-gray-50">
+                                <tr class="text-left text-sm text-gray-600 font-medium">
                                     <th class="p-4">Product</th>
                                     <th class="p-4">Mentions</th>
                                     <th class="p-4">Trend</th>
@@ -398,77 +501,77 @@
                                     <th class="p-4">vs Competitors</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-sm">
-                                <tr class="border-b border-gray-700 hover:bg-navy-light transition-colors">
+                            <tbody class="text-sm divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="p-4">
-                                        <div class="font-medium">iPhone 15 Pro</div>
-                                        <div class="text-gray-400 text-xs">Smartphone</div>
+                                        <div class="font-medium text-gray-900">iPhone 15 Pro</div>
+                                        <div class="text-gray-500 text-xs">Smartphone</div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="font-semibold">245</div>
-                                        <div class="text-gray-400 text-xs">this week</div>
+                                        <div class="font-semibold text-gray-900">245</div>
+                                        <div class="text-gray-500 text-xs">this week</div>
                                     </td>
                                     <td class="p-4">
-                                        <span class="text-green-400 flex items-center">
+                                        <span class="text-green-500 flex items-center font-medium">
                                             ↗ +12%
                                         </span>
                                     </td>
                                     <td class="p-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="w-4 h-4 bg-green-500 rounded-sm"></div>
-                                            <span>ChatGPT</span>
+                                            <span class="text-gray-700">ChatGPT</span>
                                         </div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="text-green-400">↗ Leading</div>
+                                        <div class="text-green-500 font-medium">↗ Leading</div>
                                     </td>
                                 </tr>
-                                <tr class="border-b border-gray-700 hover:bg-navy-light transition-colors">
+                                <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="p-4">
-                                        <div class="font-medium">MacBook Pro M3</div>
-                                        <div class="text-gray-400 text-xs">Laptop</div>
+                                        <div class="font-medium text-gray-900">MacBook Pro M3</div>
+                                        <div class="text-gray-500 text-xs">Laptop</div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="font-semibold">198</div>
-                                        <div class="text-gray-400 text-xs">this week</div>
+                                        <div class="font-semibold text-gray-900">198</div>
+                                        <div class="text-gray-500 text-xs">this week</div>
                                     </td>
                                     <td class="p-4">
-                                        <span class="text-green-400 flex items-center">
+                                        <span class="text-green-500 flex items-center font-medium">
                                             ↗ +7%
                                         </span>
                                     </td>
                                     <td class="p-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="w-4 h-4 bg-purple-500 rounded-sm"></div>
-                                            <span>Perplexity</span>
+                                            <span class="text-gray-700">Perplexity</span>
                                         </div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="text-yellow-400">↔ 2nd place</div>
+                                        <div class="text-yellow-500 font-medium">↔ 2nd place</div>
                                     </td>
                                 </tr>
-                                <tr class="hover:bg-navy-light transition-colors">
+                                <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="p-4">
-                                        <div class="font-medium">AirPods Pro</div>
-                                        <div class="text-gray-400 text-xs">Headphones</div>
+                                        <div class="font-medium text-gray-900">AirPods Pro</div>
+                                        <div class="text-gray-500 text-xs">Headphones</div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="font-semibold">156</div>
-                                        <div class="text-gray-400 text-xs">this week</div>
+                                        <div class="font-semibold text-gray-900">156</div>
+                                        <div class="text-gray-500 text-xs">this week</div>
                                     </td>
                                     <td class="p-4">
-                                        <span class="text-red-400 flex items-center">
+                                        <span class="text-red-500 flex items-center font-medium">
                                             ↘ -3%
                                         </span>
                                     </td>
                                     <td class="p-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="w-4 h-4 bg-orange-500 rounded-sm"></div>
-                                            <span>Claude</span>
+                                            <span class="text-gray-700">Claude</span>
                                         </div>
                                     </td>
                                     <td class="p-4">
-                                        <div class="text-green-400">↗ Leading</div>
+                                        <div class="text-green-500 font-medium">↗ Leading</div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -480,50 +583,103 @@
     </section>
 
     <!-- Use Cases Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Perfect for SEO teams managing product visibility</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Perfect for SEO teams managing product visibility</h2>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700 text-center">
-                    <div class="text-4xl mb-4">🛒</div>
-                    <h3 class="font-semibold mb-3">E-commerce Teams</h3>
-                    <ul class="text-sm text-gray-400 space-y-2 text-left">
-                        <li>• Track AI recommendations vs competitors</li>
-                        <li>• Monitor new product launch visibility</li>
-                        <li>• Optimize product descriptions for AI discovery</li>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
+                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                            <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-3 text-gray-900">E-commerce Teams</h3>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track AI recommendations vs competitors</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Monitor new product launch visibility</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Optimize product descriptions for AI discovery</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700 text-center">
-                    <div class="text-4xl mb-4">💻</div>
-                    <h3 class="font-semibold mb-3">SaaS Companies</h3>
-                    <ul class="text-sm text-gray-400 space-y-2 text-left">
-                        <li>• See when software gets mentioned in tool recommendations</li>
-                        <li>• Track feature-based recommendations</li>
-                        <li>• Monitor competitor positioning</li>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
+                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                            <path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-3 text-gray-900">SaaS Companies</h3>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>See when software gets mentioned in tool recommendations</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track feature-based recommendations</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Monitor competitor positioning</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700 text-center">
-                    <div class="text-4xl mb-4">🏢</div>
-                    <h3 class="font-semibold mb-3">Service Businesses</h3>
-                    <ul class="text-sm text-gray-400 space-y-2 text-left">
-                        <li>• Track service recommendations in local AI search</li>
-                        <li>• Monitor expertise-based mentions</li>
-                        <li>• Analyze service category performance</li>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
+                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                            <path d="M3.75 21h16.5M4.5 3h15l-.75 18H5.25L4.5 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-3 text-gray-900">Service Businesses</h3>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track service recommendations in local AI search</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Monitor expertise-based mentions</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Analyze service category performance</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700 text-center">
-                    <div class="text-4xl mb-4">📊</div>
-                    <h3 class="font-semibold mb-3">SEO Agencies</h3>
-                    <ul class="text-sm text-gray-400 space-y-2 text-left">
-                        <li>• Provide AI search visibility reports</li>
-                        <li>• Track client products across platforms</li>
-                        <li>• Demonstrate ROI from optimization</li>
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
+                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
+                            <path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"/>
+                            <path d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold mb-3 text-gray-900">SEO Agencies</h3>
+                    <ul class="text-sm text-gray-600 space-y-2 text-left">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Provide AI search visibility reports</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Track client products across platforms</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>Demonstrate ROI from optimization</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -531,88 +687,88 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-16 px-4 sm:px-6 lg:px-8 bg-navy-light">
+    <section id="pricing" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple pricing for product-focused SEO teams</h2>
-                <p class="text-xl text-gray-300">Choose the plan that fits your product tracking needs</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Simple pricing for product-focused SEO teams</h2>
+                <p class="text-xl text-gray-600">Choose the plan that fits your product tracking needs</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Professional Plan -->
-                <div class="bg-navy-card rounded-2xl p-8 border border-gray-700">
+                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Professional</h3>
-                        <div class="text-4xl font-bold text-blue-accent mb-2">$149<span class="text-lg text-gray-400">/month</span></div>
-                        <p class="text-gray-400">Perfect for SEO teams and small agencies</p>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Professional</h3>
+                        <div class="text-4xl font-bold text-blue-600 mb-2">$149<span class="text-lg text-gray-500">/month</span></div>
+                        <p class="text-gray-600">Perfect for SEO teams and small agencies</p>
                     </div>
 
                     <div class="space-y-6">
                         <div>
-                            <h4 class="font-semibold mb-3 text-blue-accent">Product Tracking:</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>50 products/services</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>5 competitor brands</strong> monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>3 AI platforms</strong> (ChatGPT, Perplexity, Bing Chat)</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>1,000 relevant queries</strong> daily monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Basic reporting</strong> and alerts</span></li>
+                            <h4 class="font-semibold mb-3 text-blue-600">Product Tracking:</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>50 products/services</strong> tracking</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>5 competitor brands</strong> monitoring</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>3 AI platforms</strong> (ChatGPT, Perplexity, Bing Chat)</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>1,000 relevant queries</strong> daily monitoring</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Basic reporting</strong> and alerts</span></li>
                             </ul>
                         </div>
 
                         <div>
-                            <h4 class="font-semibold mb-3 text-blue-accent">Analytics Features:</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Product mention analytics</strong></span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Competitive comparison</strong> dashboards</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Query performance</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Email alerts</strong> for significant changes</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>CSV exports</strong> for reporting</span></li>
+                            <h4 class="font-semibold mb-3 text-blue-600">Analytics Features:</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Product mention analytics</strong></span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Competitive comparison</strong> dashboards</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Query performance</strong> tracking</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Email alerts</strong> for significant changes</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>CSV exports</strong> for reporting</span></li>
                             </ul>
                         </div>
                     </div>
 
-                    <button class="w-full bg-blue-accent hover:bg-blue-bright py-3 rounded-lg font-semibold mt-8 transition-colors">
+                    <button class="w-full gradient-button hover:opacity-90 text-white py-3 rounded-lg font-semibold mt-8 transition-all shadow-md">
                         Start Free Trial
                     </button>
                 </div>
 
                 <!-- Enterprise Plan -->
-                <div class="bg-navy-card rounded-2xl p-8 border-2 border-blue-accent relative">
+                <div class="bg-blue-50 rounded-2xl p-8 border-2 border-blue-600 relative shadow-md">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-blue-accent px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
+                        <span class="gradient-button px-4 py-1 rounded-full text-sm font-semibold text-white shadow-md">Most Popular</span>
                     </div>
                     
                     <div class="mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
-                        <div class="text-4xl font-bold text-blue-accent mb-2">$349<span class="text-lg text-gray-400">/month</span></div>
-                        <p class="text-gray-400">For large teams and agencies with multiple brands</p>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Enterprise</h3>
+                        <div class="text-4xl font-bold text-blue-600 mb-2">$349<span class="text-lg text-gray-500">/month</span></div>
+                        <p class="text-gray-600">For large teams and agencies with multiple brands</p>
                     </div>
 
                     <div class="space-y-6">
                         <div>
-                            <h4 class="font-semibold mb-3 text-blue-accent">Everything in Professional, plus:</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Unlimited products</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>15 competitor brands</strong> monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>All AI platforms</strong> (ChatGPT, Perplexity, Claude, Bing Chat, Gemini)</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>5,000 queries</strong> daily monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Advanced analytics</strong> and custom reports</span></li>
+                            <h4 class="font-semibold mb-3 text-blue-600">Everything in Professional, plus:</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Unlimited products</strong> tracking</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>15 competitor brands</strong> monitoring</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>All AI platforms</strong> (ChatGPT, Perplexity, Claude, Bing Chat, Gemini)</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>5,000 queries</strong> daily monitoring</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Advanced analytics</strong> and custom reports</span></li>
                             </ul>
                         </div>
 
                         <div>
-                            <h4 class="font-semibold mb-3 text-blue-accent">Advanced Features:</h4>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Real-time Slack/email alerts</strong></span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>API access</strong> for custom integrations</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>White-label reporting</strong> for agencies</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Team collaboration</strong> tools</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-400">✅</span><span><strong>Priority support</strong> (Slack + Phone)</span></li>
+                            <h4 class="font-semibold mb-3 text-blue-600">Advanced Features:</h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Real-time Slack/email alerts</strong></span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>API access</strong> for custom integrations</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>White-label reporting</strong> for agencies</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Team collaboration</strong> tools</span></li>
+                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Priority support</strong> (Slack + Phone)</span></li>
                             </ul>
                         </div>
                     </div>
 
-                    <button class="w-full bg-blue-accent hover:bg-blue-bright py-3 rounded-lg font-semibold mt-8 transition-colors">
+                    <button class="w-full gradient-button hover:opacity-90 text-white py-3 rounded-lg font-semibold mt-8 transition-all shadow-md">
                         Start Free Trial
                     </button>
                 </div>
@@ -620,23 +776,23 @@
 
             <!-- Add-ons -->
             <div class="mt-12 text-center">
-                <h3 class="text-xl font-semibold mb-6">Add-ons Available</h3>
+                <h3 class="text-xl font-semibold mb-6 text-gray-900">Add-ons Available</h3>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                    <div class="bg-navy-card p-4 rounded-lg border border-gray-700">
-                        <div class="font-semibold text-blue-accent">Claude Pro monitoring</div>
-                        <div class="text-sm text-gray-400">+$49/month</div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-semibold text-blue-600">Claude Pro monitoring</div>
+                        <div class="text-sm text-gray-600">+$49/month</div>
                     </div>
-                    <div class="bg-navy-card p-4 rounded-lg border border-gray-700">
-                        <div class="font-semibold text-blue-accent">Additional query volume</div>
-                        <div class="text-sm text-gray-400">+$0.05/query beyond limits</div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-semibold text-blue-600">Additional query volume</div>
+                        <div class="text-sm text-gray-600">+$0.05/query beyond limits</div>
                     </div>
-                    <div class="bg-navy-card p-4 rounded-lg border border-gray-700">
-                        <div class="font-semibold text-blue-accent">Custom competitive intelligence</div>
-                        <div class="text-sm text-gray-400">+$199/month</div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-semibold text-blue-600">Custom competitive intelligence</div>
+                        <div class="text-sm text-gray-600">+$199/month</div>
                     </div>
-                    <div class="bg-navy-card p-4 rounded-lg border border-gray-700">
-                        <div class="font-semibold text-blue-accent">White-label dashboard</div>
-                        <div class="text-sm text-gray-400">+$299/month</div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div class="font-semibold text-blue-600">White-label dashboard</div>
+                        <div class="text-sm text-gray-600">+$299/month</div>
                     </div>
                 </div>
             </div>
@@ -644,133 +800,133 @@
     </section>
 
     <!-- Social Proof Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Trusted by SEO teams at leading brands</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Trusted by SEO teams at leading brands</h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 mb-12">
                 <!-- Testimonial 1 -->
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700">
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
                     <div class="flex items-center space-x-4 mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">SC</div>
                         <div>
-                            <div class="font-semibold">Sarah Chen</div>
-                            <div class="text-sm text-gray-400">Head of SEO at TechCorp</div>
+                            <div class="font-semibold text-gray-900">Sarah Chen</div>
+                            <div class="text-sm text-gray-600">Head of SEO at TechCorp</div>
                         </div>
                     </div>
-                    <p class="text-gray-300 italic">"We discovered our flagship product wasn't being mentioned in 80% of relevant AI queries. Within a month of using ProductTracker AI, we identified exactly what was missing and saw a 40% increase in AI recommendations."</p>
+                    <p class="text-gray-700 italic">"We discovered our flagship product wasn't being mentioned in 80% of relevant AI queries. Within a month of using ProductTracker AI, we identified exactly what was missing and saw a 40% increase in AI recommendations."</p>
                 </div>
 
                 <!-- Testimonial 2 -->
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700">
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
                     <div class="flex items-center space-x-4 mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">MR</div>
                         <div>
-                            <div class="font-semibold">Mike Rodriguez</div>
-                            <div class="text-sm text-gray-400">SEO Director at RetailCo</div>
+                            <div class="font-semibold text-gray-900">Mike Rodriguez</div>
+                            <div class="text-sm text-gray-600">SEO Director at RetailCo</div>
                         </div>
                     </div>
-                    <p class="text-gray-300 italic">"The competitive analysis feature is a game-changer. We can see exactly which products our competitors are winning on and why AI systems prefer them."</p>
+                    <p class="text-gray-700 italic">"The competitive analysis feature is a game-changer. We can see exactly which products our competitors are winning on and why AI systems prefer them."</p>
                 </div>
 
                 <!-- Testimonial 3 -->
-                <div class="bg-navy-card rounded-lg p-6 border border-gray-700">
+                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
                     <div class="flex items-center space-x-4 mb-4">
                         <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">LP</div>
                         <div>
-                            <div class="font-semibold">Lisa Park</div>
-                            <div class="text-sm text-gray-400">SEO Consultant at GrowthAgency</div>
+                            <div class="font-semibold text-gray-900">Lisa Park</div>
+                            <div class="text-sm text-gray-600">SEO Consultant at GrowthAgency</div>
                         </div>
                     </div>
-                    <p class="text-gray-300 italic">"Our client's product mentions in ChatGPT increased by 150% after we used the insights to optimize their product information. The ROI speaks for itself."</p>
+                    <p class="text-gray-700 italic">"Our client's product mentions in ChatGPT increased by 150% after we used the insights to optimize their product information. The ROI speaks for itself."</p>
                 </div>
             </div>
 
             <!-- Usage Stats -->
             <div class="grid grid-cols-3 gap-8 text-center">
                 <div>
-                    <div class="text-4xl font-bold text-blue-accent animate-counter">500+</div>
-                    <div class="text-gray-400">SEO professionals tracking product visibility</div>
+                    <div class="text-4xl font-bold text-blue-600 animate-counter">500+</div>
+                    <div class="text-gray-600">SEO professionals tracking product visibility</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-blue-accent animate-counter">50K+</div>
-                    <div class="text-gray-400">products monitored daily across AI platforms</div>
+                    <div class="text-4xl font-bold text-blue-600 animate-counter">50K+</div>
+                    <div class="text-gray-600">products monitored daily across AI platforms</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-blue-accent animate-counter">2M+</div>
-                    <div class="text-gray-400">AI queries analyzed for product mentions</div>
+                    <div class="text-4xl font-bold text-blue-600 animate-counter">2M+</div>
+                    <div class="text-gray-600">AI queries analyzed for product mentions</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-navy-light">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h2>
             </div>
 
             <div class="space-y-4">
-                <div class="bg-navy-card rounded-lg border border-gray-700">
-                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(this)">
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-semibold">How is this different from brand monitoring tools?</h3>
-                            <span class="transform transition-transform duration-200">+</span>
+                            <h3 class="font-semibold text-gray-900">How is this different from brand monitoring tools?</h3>
+                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
                         </div>
                     </button>
                     <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-300">We focus specifically on product and service visibility, not just brand mentions. You can track how individual SKUs, services, or product categories perform in AI recommendations.</p>
+                        <p class="text-gray-700">We focus specifically on product and service visibility, not just brand mentions. You can track how individual SKUs, services, or product categories perform in AI recommendations.</p>
                     </div>
                 </div>
 
-                <div class="bg-navy-card rounded-lg border border-gray-700">
-                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(this)">
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-semibold">What counts as a "product mention"?</h3>
-                            <span class="transform transition-transform duration-200">+</span>
+                            <h3 class="font-semibold text-gray-900">What counts as a "product mention"?</h3>
+                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
                         </div>
                     </button>
                     <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-300">Any time your specific product name, model number, or service offering appears in an AI response to relevant queries. We track both direct recommendations and contextual mentions.</p>
+                        <p class="text-gray-700">Any time your specific product name, model number, or service offering appears in an AI response to relevant queries. We track both direct recommendations and contextual mentions.</p>
                     </div>
                 </div>
 
-                <div class="bg-navy-card rounded-lg border border-gray-700">
-                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(this)">
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-semibold">Can I track competitor products?</h3>
-                            <span class="transform transition-transform duration-200">+</span>
+                            <h3 class="font-semibold text-gray-900">Can I track competitor products?</h3>
+                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
                         </div>
                     </button>
                     <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-300">Yes, you can monitor up to 5-15 competitor brands (depending on plan) to see how their products compare to yours in AI search results.</p>
+                        <p class="text-gray-700">Yes, you can monitor up to 5-15 competitor brands (depending on plan) to see how their products compare to yours in AI search results.</p>
                     </div>
                 </div>
 
-                <div class="bg-navy-card rounded-lg border border-gray-700">
-                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(this)">
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-semibold">Do you integrate with e-commerce platforms?</h3>
-                            <span class="transform transition-transform duration-200">+</span>
+                            <h3 class="font-semibold text-gray-900">Do you integrate with e-commerce platforms?</h3>
+                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
                         </div>
                     </button>
                     <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-300">Yes, we integrate with Shopify, WooCommerce, Magento, and other major platforms to automatically import your product catalog.</p>
+                        <p class="text-gray-700">Yes, we integrate with Shopify, WooCommerce, Magento, and other major platforms to automatically import your product catalog.</p>
                     </div>
                 </div>
 
-                <div class="bg-navy-card rounded-lg border border-gray-700">
-                    <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(this)">
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
                         <div class="flex justify-between items-center">
-                            <h3 class="font-semibold">How accurate is the tracking?</h3>
-                            <span class="transform transition-transform duration-200">+</span>
+                            <h3 class="font-semibold text-gray-900">How accurate is the tracking?</h3>
+                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
                         </div>
                     </button>
                     <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-300">We use advanced query simulation and multiple testing methodologies to achieve 95%+ accuracy in tracking product mentions across AI platforms.</p>
+                        <p class="text-gray-700">We use advanced query simulation and multiple testing methodologies to achieve 95%+ accuracy in tracking product mentions across AI platforms.</p>
                     </div>
                 </div>
             </div>
@@ -778,23 +934,23 @@
     </section>
 
     <!-- Final CTA Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to see how your products perform in AI search?</h2>
-            <p class="text-xl text-gray-300 mb-8">Join 500+ SEO teams already tracking their product visibility in the future of search</p>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Ready to see how your products perform in AI search?</h2>
+            <p class="text-xl text-gray-600 mb-8">Join 500+ SEO teams already tracking their product visibility in the future of search</p>
             
             <div class="mb-8">
-                <button class="bg-blue-accent hover:bg-blue-bright px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 mr-4 mb-4">
+                <button class="gradient-button hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg text-white transition-all transform hover:scale-105 mr-4 mb-4 shadow-md">
                     Start Your Free Trial Today
                 </button>
-                <button class="border border-blue-accent text-blue-accent hover:bg-blue-accent hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all mb-4">
+                <button class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all mb-4 shadow-sm">
                     Book a Demo
                 </button>
             </div>
             
-            <p class="text-gray-400 mb-8">14 days free • Track 10 products • No credit card required</p>
+            <p class="text-gray-500 mb-8">14 days free • Track 10 products • No credit card required</p>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-gray-400">
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-gray-600">
                 <div class="flex items-center space-x-2">
                     <span>📧</span>
                     <span>hello@producttracker.ai</span>
@@ -812,11 +968,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-navy-light border-t border-gray-700">
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 border-t border-gray-200">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-xl font-bold gradient-text mb-4 md:mb-0">ProductTracker AI</div>
-                <div class="text-gray-400 text-sm">
+                <div class="text-gray-600 text-sm">
                     © 2025 ProductTracker AI. All rights reserved.
                 </div>
             </div>
