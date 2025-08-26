@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProductTracker AI - AI Search Analytics for SEO Teams</title>
+    <title>BoostMyGEO - Перевірте, чи рекомендує ШІ ваші продукти</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,7 +18,9 @@
                         'gray-800': '#1e293b',
                         'gray-900': '#0f172a',
                         'blue-500': '#3b82f6',
-                        'blue-600': '#2563eb'
+                        'blue-600': '#2563eb',
+                        'green-500': '#10b981',
+                        'green-600': '#059669'
                     }
                 }
             }
@@ -32,14 +34,24 @@
             background-clip: text;
         }
         .gradient-button {
+            background: linear-gradient(45deg, #059669, #10b981);
+        }
+        .gradient-button-blue {
             background: linear-gradient(45deg, #2563eb, #3b82f6);
         }
-        .dashboard-card {
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hover-lift {
             transition: all 0.3s ease;
         }
-        .dashboard-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         .feature-card {
             transition: all 0.3s ease;
@@ -49,12 +61,12 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border-color: #3b82f6;
         }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
+        .dashboard-card {
+            transition: all 0.3s ease;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         .animate-counter {
             animation: countUp 2s ease-out;
@@ -68,865 +80,340 @@
             stroke: currentColor;
             stroke-width: 1.5;
         }
+        .drag-over {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
     <!-- Header -->
-    <header class="fixed w-full top-0 bg-white/90 backdrop-blur-lg border-b border-gray-200 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <div class="text-xl font-bold gradient-text">ProductTracker AI</div>
+                    <div class="text-xl font-bold gradient-text">BoostMyGEO</div>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
-                    <a href="#demo" class="text-gray-600 hover:text-gray-900 transition-colors">Demo</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Login</a>
-                </nav>
-                <button class="gradient-button hover:opacity-90 px-4 py-2 rounded-lg font-medium text-white transition-all">
-                    Start Free Trial
-                </button>
-                <!-- Mobile menu button -->
-                <button class="md:hidden text-gray-800" onclick="toggleMobileMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                <div class="flex items-center space-x-4">
+                    <button class="gradient-button hover:opacity-90 px-4 py-2 rounded-lg font-semibold text-white transition-all shadow-sm">
+                        Спробувати безкоштовно (10 запитів)
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center fade-in">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900">
-                    AI search analytics for <span class="gradient-text">SEO teams</span>
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="fade-in">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 leading-tight">
+                    За 60 секунд дізнайтеся, які з ваших запитів <span class="gradient-text">ШІ реально рекомендує</span> клієнтам
                 </h1>
-                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-normal">
-                    Track your products and services visibility across ChatGPT, Perplexity, and Claude. See which products get recommended, when, and why.
+                <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                    Дізнайтеся точно, наскільки видимий кожен з ваших продуктів, коли клієнти запитують у ШІ рекомендації.
                 </p>
-                
-                <!-- Value Props -->
-                <div class="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto">
-                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex items-center justify-center md:justify-start space-x-3">
-                            <div class="w-8 h-8 text-blue-600">
-                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm md:text-base text-gray-700 font-medium">Track product mentions across all AI platforms</span>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex items-center justify-center md:justify-start space-x-3">
-                            <div class="w-8 h-8 text-blue-600">
-                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                    <path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm md:text-base text-gray-700 font-medium">Monitor service recommendations in AI responses</span>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex items-center justify-center md:justify-start space-x-3">
-                            <div class="w-8 h-8 text-blue-600">
-                                <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                    <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm md:text-base text-gray-700 font-medium">Analyze competitor products performance</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- CTAs -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                    <button class="gradient-button hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg text-white transition-all transform hover:scale-105 shadow-md">
-                        Start Free Trial
-                    </button>
-                    <button class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all shadow-sm">
-                        Watch Demo
-                    </button>
-                </div>
+                <!-- CSV Upload Section -->
+                <div class="bg-gray-50 rounded-2xl p-6 md:p-8 mb-8 max-w-2xl mx-auto border border-gray-200">
+                    <p class="text-lg font-semibold text-gray-900 mb-4">
+                        Додай CSV файл з ключовими фразами і отримай результат
+                    </p>
+                    
+                    <div class="mb-4">
+                        <button id="downloadTemplate" class="text-blue-600 underline underline-offset-4 decoration-blue-600 hover:decoration-2 font-medium transition-all">
+                            Скачати шаблон файлу
+                        </button>
+                    </div>
 
-                <!-- Hero Dashboard Mockup -->
-                <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg max-w-5xl mx-auto">
-                    <div class="mb-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">Product Performance Dashboard</h3>
-                            <div class="flex space-x-2">
-                                <div class="w-6 h-6 bg-green-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">G</div>
-                                <div class="w-6 h-6 bg-purple-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">P</div>
-                                <div class="w-6 h-6 bg-orange-500 rounded-sm flex items-center justify-center text-xs font-bold text-white">C</div>
-                            </div>
+                    <!-- File Upload -->
+                    <div id="uploadArea" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer">
+                        <div id="uploadContent">
+                            <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p class="text-gray-600 mb-2">Перетягніть CSV файл сюди або</p>
+                            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Оберіть файл
+                            </button>
+                            <p class="text-xs text-gray-500 mt-2">Тільки .csv файли до 1 МБ</p>
                         </div>
                         
-                        <!-- Product Cards -->
-                        <div class="grid md:grid-cols-3 gap-4 mb-6">
-                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium text-gray-900">iPhone 15 Pro</h4>
-                                    <span class="text-green-500 text-sm font-medium">↗ +12%</span>
-                                </div>
-                                <div class="text-2xl font-bold text-blue-600 animate-counter">245</div>
-                                <div class="text-sm text-gray-500">mentions this week</div>
-                            </div>
-                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium text-gray-900">Samsung Galaxy S24</h4>
-                                    <span class="text-green-500 text-sm font-medium">↗ +8%</span>
-                                </div>
-                                <div class="text-2xl font-bold text-blue-600 animate-counter">189</div>
-                                <div class="text-sm text-gray-500">mentions this week</div>
-                            </div>
-                            <div class="dashboard-card bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-medium text-gray-900">Google Pixel 8</h4>
-                                    <span class="text-red-500 text-sm font-medium">↘ -3%</span>
-                                </div>
-                                <div class="text-2xl font-bold text-blue-600 animate-counter">156</div>
-                                <div class="text-sm text-gray-500">mentions this week</div>
+                        <div id="fileInfo" class="hidden">
+                            <div class="flex items-center justify-center space-x-2 text-green-600">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span id="fileName"></span>
+                                <span id="fileSize" class="text-sm"></span>
                             </div>
                         </div>
 
-                        <!-- Mini Chart -->
-                        <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
-                            <h4 class="font-medium mb-3 text-gray-900">AI Platform Performance</h4>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-700">ChatGPT</span>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-32 bg-gray-200 rounded-full h-2">
-                                            <div class="bg-blue-600 h-2 rounded-full" style="width: 78%"></div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 font-medium">78%</span>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-700">Perplexity</span>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-32 bg-gray-200 rounded-full h-2">
-                                            <div class="bg-purple-500 h-2 rounded-full" style="width: 65%"></div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 font-medium">65%</span>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-700">Claude</span>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-32 bg-gray-200 rounded-full h-2">
-                                            <div class="bg-orange-500 h-2 rounded-full" style="width: 52%"></div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 font-medium">52%</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="errorInfo" class="hidden text-red-600">
+                            <svg class="w-5 h-5 mx-auto mb-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span id="errorMessage"></span>
                         </div>
                     </div>
+
+                    <input type="file" id="fileInput" class="hidden" accept=".csv">
+
+                    <div class="mt-6">
+                        <button id="uploadCTA" class="gradient-button hover:opacity-90 px-8 py-3 rounded-xl font-bold text-lg text-white transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            Спробувати безкоштовно (10 запитів)
+                        </button>
+                    </div>
+
+                    <p class="text-gray-500 text-sm mt-4">Безкоштовна пробна версія • Без кредитної картки • Миттєві результати</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Preview Table -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Ваші продукти або послуги в пошуку ШІ</h3>
+                
+                <!-- Competitor Toggle -->
+                <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div class="flex items-center space-x-3 mb-4 sm:mb-0">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="competitorToggle" class="sr-only" role="switch">
+                            <div class="relative">
+                                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                                <div class="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"></div>
+                            </div>
+                            <span class="ml-3 text-gray-900 font-medium">Порівнювати з конкурентами</span>
+                        </label>
+                    </div>
+                    
+                    <div id="competitorInput" class="hidden">
+                        <input type="text" 
+                               placeholder="competitor1.com, competitor2.com, ..." 
+                               class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               id="competitorDomains">
+                        <div id="domainError" class="text-red-500 text-xs mt-1 hidden">Перевірте формат доменів (наприклад: example.com)</div>
+                    </div>
+                </div>
+
+                <!-- Desktop Table -->
+                <div class="hidden md:block overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Запит</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Рекомендація ШІ</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Причина</th>
+                                <th id="competitorColumn" class="text-left py-3 px-4 font-semibold text-gray-900 hidden">Конкурент</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-4 font-medium text-gray-900">Бездротовий зарядний пристрій iPhone</td>
+                                <td class="py-4 px-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Рекомендується
+                                    </span>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <svg class="w-4 h-4 inline" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="py-4 px-4 text-gray-500 competitor-cell hidden">—</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-4 font-medium text-gray-900">Підставка для ноутбука</td>
+                                <td class="py-4 px-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Не рекомендується
+                                    </span>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="laptop-stand">
+                                        Чому так мало?
+                                    </button>
+                                </td>
+                                <td class="py-4 px-4 text-gray-700 competitor-cell hidden">competitor1.com</td>
+                            </tr>
+                            <tr id="laptop-stand-help" class="hidden border-b border-gray-100 bg-blue-50">
+                                <td colspan="4" class="py-3 px-4 text-sm text-gray-700">
+                                    Низька релевантність опису продукту. ШІ шукає конкретні характеристики та користувацькі відгуки. Рекомендується оновити опис з технічними деталями.
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-4 font-medium text-gray-900">USB-C хаб</td>
+                                <td class="py-4 px-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Не рекомендується
+                                    </span>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="usb-hub">
+                                        Виправити це
+                                    </button>
+                                </td>
+                                <td class="py-4 px-4 text-gray-700 competitor-cell hidden">competitor2.com</td>
+                            </tr>
+                            <tr id="usb-hub-help" class="hidden border-b border-gray-100 bg-blue-50">
+                                <td colspan="4" class="py-3 px-4 text-sm text-gray-700">
+                                    Слабкі доменні сигнали та відсутність згадок у авторитетних джерелах. ШІ віддає перевагу продуктам з кращою онлайн-репутацією та відгуками.
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td class="py-4 px-4 font-medium text-gray-900">Чохол для телефону</td>
+                                <td class="py-4 px-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Рекомендується
+                                    </span>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <svg class="w-4 h-4 inline" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="py-4 px-4 text-gray-500 competitor-cell hidden">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Cards -->
+                <div class="md:hidden space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="font-medium text-gray-900 mb-2">Бездротовий зарядний пристрій iPhone</div>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Рекомендується
+                            </span>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: —</div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="font-medium text-gray-900 mb-2">Підставка для ноутбука</div>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                Не рекомендується
+                            </span>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="laptop-stand-mobile">
+                                Чому так мало?
+                            </button>
+                        </div>
+                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: competitor1.com</div>
+                        <div id="laptop-stand-mobile-help" class="hidden mt-3 p-3 bg-blue-50 rounded text-sm text-gray-700">
+                            Низька релевантність опису продукту. ШІ шукає конкретні характеристики та користувацькі відгуки. Рекомендується оновити опис з технічними деталями.
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="font-medium text-gray-900 mb-2">USB-C хаб</div>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                Не рекомендується
+                            </span>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="usb-hub-mobile">
+                                Виправити це
+                            </button>
+                        </div>
+                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: competitor2.com</div>
+                        <div id="usb-hub-mobile-help" class="hidden mt-3 p-3 bg-blue-50 rounded text-sm text-gray-700">
+                            Слабкі доменні сигнали та відсутність згадок у авторитетних джерелах. ШІ віддає перевагу продуктам з кращою онлайн-репутацією та відгуками.
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="font-medium text-gray-900 mb-2">Чохол для телефону</div>
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Рекомендується
+                            </span>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                        </div>
+                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: —</div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button class="gradient-button-blue hover:opacity-90 px-8 py-3 rounded-lg font-semibold text-white transition-all">
+                        Переглянути повний звіт
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Problem Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Your products are invisible in AI search results</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-500 mt-1">•</span>
-                                <span class="text-gray-700"><strong class="text-gray-900">60% of purchase decisions</strong> now start with AI assistants like ChatGPT</span>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-500 mt-1">•</span>
-                                <span class="text-gray-700">Your <strong class="text-gray-900">best-selling products</strong> never get mentioned in AI recommendations</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-500 mt-1">•</span>
-                                <span class="text-gray-700"><strong class="text-gray-900">Competitors' products</strong> appear in AI responses while yours don't</span>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-500 mt-1">•</span>
-                                <span class="text-gray-700"><strong class="text-gray-900">No visibility</strong> into which products AI recommends and why</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <span class="text-red-500 mt-1">•</span>
-                                <span class="text-gray-700">Traditional SEO tools <strong class="text-gray-900">don't track product mentions</strong> in AI platforms</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Ваші клієнти запитують у ШІ: "Що мені купити?"</h2>
+                <p class="text-2xl text-gray-600 max-w-3xl mx-auto">Чи рекомендує ШІ ВАШІ продукти... чи продукти ваших конкурентів?</p>
             </div>
             
-            <!-- Split comparison visual -->
-            <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                    <h3 class="font-semibold mb-4 text-green-600">Google Search Results</h3>
-                    <div class="space-y-3">
-                        <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-600">
-                            <div class="text-sm text-blue-600 font-medium">Your Product - #3 Position</div>
-                            <div class="text-xs text-gray-500 mt-1">Best wireless headphones 2024 - YourBrand Pro</div>
-                        </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="feature-card bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Клієнт запитує ChatGPT</h3>
+                    <p class="text-gray-600">"Який найкращий бездротовий зарядний пристрій для iPhone?"</p>
                 </div>
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                    <h3 class="font-semibold mb-4 text-red-600">ChatGPT Response</h3>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <div class="text-sm italic text-gray-700">"For the best wireless headphones in 2024, I'd recommend the Sony WH-1000XM5, Bose QuietComfort 45, or Apple AirPods Max..."</div>
-                        <div class="text-xs text-red-500 mt-3 font-medium">❌ Your product not mentioned</div>
+                
+                <div class="feature-card bg-red-50 rounded-2xl p-8 text-center border border-red-200">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">The first product visibility analytics platform for AI search</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Monitor, analyze, and optimize how your products perform in the new era of AI-powered search</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 text-blue-600">
-                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900">Product Mention Tracking</h3>
-                    </div>
-                    <p class="text-gray-600 mb-4">See when and where your products get mentioned</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Real-time tracking across ChatGPT, Perplexity, Claude</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Monitor specific product/service mentions by name</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track mention frequency and context analysis</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Historical data and trending patterns</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 text-blue-600">
-                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
-                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900">Competitive Product Intelligence</h3>
-                    </div>
-                    <p class="text-gray-600 mb-4">Analyze how competitor products perform in AI search</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Compare your products vs competitors in AI responses</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>See which product categories get most AI recommendations</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Identify gaps where your products should appear</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track market share in AI mention volume</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 text-blue-600">
-                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                <path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900">Query Performance Analysis</h3>
-                    </div>
-                    <p class="text-gray-600 mb-4">Understand which searches mention your products</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track performance across thousands of relevant queries</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>See which product features get highlighted by AI</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Monitor seasonal trends and emerging opportunities</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Identify underperforming product categories</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="feature-card bg-white rounded-xl p-8 border border-gray-200 shadow-sm hover:shadow-lg">
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 text-blue-600">
-                            <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                                <path d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189 6.01 6.01 0 001.041-.397 2.25 2.25 0 00.045-4.006A6.01 6.01 0 0012 7.5c-.838 0-1.652.145-2.408.408a2.25 2.25 0 00-.045 4.006c.315.194.674.357 1.041.397.427.092.916.151 1.412.189V18M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900">Recommendation Context Analysis</h3>
-                    </div>
-                    <p class="text-gray-600 mb-4">Understand why AI recommends certain products</p>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Analyze the context when your products get mentioned</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>See what product attributes AI systems prioritize</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track recommendation patterns and triggers</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Understand positioning vs competitors</span>
-                        </li>
-                    </ul>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">ШІ рекомендує 3 продукти</h3>
+                    <p class="text-red-600 font-medium">Жоден не ваш</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Dashboard Preview Section -->
+    <!-- Social Proof -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Monitor your entire product catalog's AI visibility</h2>
-                <p class="text-xl text-gray-600">Get comprehensive insights into how AI systems recommend your products</p>
-            </div>
-
-            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
-                <!-- Dashboard Header -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                    <h3 class="text-2xl font-semibold mb-4 md:mb-0 text-gray-900">Product Analytics Dashboard</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>Last 7 days</option>
-                            <option>Last 30 days</option>
-                            <option>Last 90 days</option>
-                        </select>
-                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>All Platforms</option>
-                            <option>ChatGPT</option>
-                            <option>Perplexity</option>
-                            <option>Claude</option>
-                        </select>
-                        <select class="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>All Categories</option>
-                            <option>Smartphones</option>
-                            <option>Laptops</option>
-                            <option>Headphones</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Key Metrics -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                    <div class="text-center bg-gray-50 rounded-lg p-4">
-                        <div class="text-3xl font-bold text-blue-600 animate-counter">1,247</div>
-                        <div class="text-sm text-gray-600 font-medium">Total Mentions</div>
-                        <div class="text-green-500 text-xs font-medium">+18% vs last week</div>
-                    </div>
-                    <div class="text-center bg-gray-50 rounded-lg p-4">
-                        <div class="text-3xl font-bold text-blue-600 animate-counter">23</div>
-                        <div class="text-sm text-gray-600 font-medium">Products Tracked</div>
-                        <div class="text-blue-600 text-xs font-medium">Active monitoring</div>
-                    </div>
-                    <div class="text-center bg-gray-50 rounded-lg p-4">
-                        <div class="text-3xl font-bold text-blue-600 animate-counter">67%</div>
-                        <div class="text-sm text-gray-600 font-medium">Visibility Score</div>
-                        <div class="text-green-500 text-xs font-medium">+5% improvement</div>
-                    </div>
-                    <div class="text-center bg-gray-50 rounded-lg p-4">
-                        <div class="text-3xl font-bold text-blue-600 animate-counter">5</div>
-                        <div class="text-sm text-gray-600 font-medium">Competitors</div>
-                        <div class="text-gray-500 text-xs font-medium">Benchmarked</div>
-                    </div>
-                </div>
-
-                <!-- Product Table -->
-                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                    <div class="p-4 border-b border-gray-200 bg-gray-50">
-                        <h4 class="font-semibold text-gray-900">Top Performing Products</h4>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead class="bg-gray-50">
-                                <tr class="text-left text-sm text-gray-600 font-medium">
-                                    <th class="p-4">Product</th>
-                                    <th class="p-4">Mentions</th>
-                                    <th class="p-4">Trend</th>
-                                    <th class="p-4">Top Platform</th>
-                                    <th class="p-4">vs Competitors</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-medium text-gray-900">iPhone 15 Pro</div>
-                                        <div class="text-gray-500 text-xs">Smartphone</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="font-semibold text-gray-900">245</div>
-                                        <div class="text-gray-500 text-xs">this week</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <span class="text-green-500 flex items-center font-medium">
-                                            ↗ +12%
-                                        </span>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-4 h-4 bg-green-500 rounded-sm"></div>
-                                            <span class="text-gray-700">ChatGPT</span>
-                                        </div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="text-green-500 font-medium">↗ Leading</div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-medium text-gray-900">MacBook Pro M3</div>
-                                        <div class="text-gray-500 text-xs">Laptop</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="font-semibold text-gray-900">198</div>
-                                        <div class="text-gray-500 text-xs">this week</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <span class="text-green-500 flex items-center font-medium">
-                                            ↗ +7%
-                                        </span>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-4 h-4 bg-purple-500 rounded-sm"></div>
-                                            <span class="text-gray-700">Perplexity</span>
-                                        </div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="text-yellow-500 font-medium">↔ 2nd place</div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="p-4">
-                                        <div class="font-medium text-gray-900">AirPods Pro</div>
-                                        <div class="text-gray-500 text-xs">Headphones</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="font-semibold text-gray-900">156</div>
-                                        <div class="text-gray-500 text-xs">this week</div>
-                                    </td>
-                                    <td class="p-4">
-                                        <span class="text-red-500 flex items-center font-medium">
-                                            ↘ -3%
-                                        </span>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-4 h-4 bg-orange-500 rounded-sm"></div>
-                                            <span class="text-gray-700">Claude</span>
-                                        </div>
-                                    </td>
-                                    <td class="p-4">
-                                        <div class="text-green-500 font-medium">↗ Leading</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Perfect for SEO teams managing product visibility</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
-                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                            <path d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold mb-3 text-gray-900">E-commerce Teams</h3>
-                    <ul class="text-sm text-gray-600 space-y-2 text-left">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track AI recommendations vs competitors</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Monitor new product launch visibility</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Optimize product descriptions for AI discovery</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
-                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                            <path d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold mb-3 text-gray-900">SaaS Companies</h3>
-                    <ul class="text-sm text-gray-600 space-y-2 text-left">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>See when software gets mentioned in tool recommendations</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track feature-based recommendations</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Monitor competitor positioning</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
-                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                            <path d="M3.75 21h16.5M4.5 3h15l-.75 18H5.25L4.5 3z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold mb-3 text-gray-900">Service Businesses</h3>
-                    <ul class="text-sm text-gray-600 space-y-2 text-left">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track service recommendations in local AI search</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Monitor expertise-based mentions</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Analyze service category performance</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
-                        <svg class="w-full h-full icon-outline" viewBox="0 0 24 24">
-                            <path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"/>
-                            <path d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold mb-3 text-gray-900">SEO Agencies</h3>
-                    <ul class="text-sm text-gray-600 space-y-2 text-left">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Provide AI search visibility reports</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Track client products across platforms</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-blue-600 mt-1">•</span>
-                            <span>Demonstrate ROI from optimization</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Simple pricing for product-focused SEO teams</h2>
-                <p class="text-xl text-gray-600">Choose the plan that fits your product tracking needs</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Professional Plan -->
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Professional</h3>
-                        <div class="text-4xl font-bold text-blue-600 mb-2">$149<span class="text-lg text-gray-500">/month</span></div>
-                        <p class="text-gray-600">Perfect for SEO teams and small agencies</p>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold mb-3 text-blue-600">Product Tracking:</h4>
-                            <ul class="space-y-2 text-sm text-gray-700">
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>50 products/services</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>5 competitor brands</strong> monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>3 AI platforms</strong> (ChatGPT, Perplexity, Bing Chat)</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>1,000 relevant queries</strong> daily monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Basic reporting</strong> and alerts</span></li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 class="font-semibold mb-3 text-blue-600">Analytics Features:</h4>
-                            <ul class="space-y-2 text-sm text-gray-700">
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Product mention analytics</strong></span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Competitive comparison</strong> dashboards</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Query performance</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Email alerts</strong> for significant changes</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>CSV exports</strong> for reporting</span></li>
-                            </ul>
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="feature-card bg-white rounded-2xl p-8 text-center border border-gray-200">
+                    <p class="text-xl text-gray-700 italic mb-6">"Нарешті я знаю, чи рекомендує ШІ мої продукти"</p>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                        <div class="text-left">
+                            <div class="font-semibold text-gray-900">Alex</div>
+                            <div class="text-sm text-gray-600">Joozoor</div>
                         </div>
                     </div>
-
-                    <button class="w-full gradient-button hover:opacity-90 text-white py-3 rounded-lg font-semibold mt-8 transition-all shadow-md">
-                        Start Free Trial
-                    </button>
                 </div>
-
-                <!-- Enterprise Plan -->
-                <div class="bg-blue-50 rounded-2xl p-8 border-2 border-blue-600 relative shadow-md">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="gradient-button px-4 py-1 rounded-full text-sm font-semibold text-white shadow-md">Most Popular</span>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Enterprise</h3>
-                        <div class="text-4xl font-bold text-blue-600 mb-2">$349<span class="text-lg text-gray-500">/month</span></div>
-                        <p class="text-gray-600">For large teams and agencies with multiple brands</p>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-semibold mb-3 text-blue-600">Everything in Professional, plus:</h4>
-                            <ul class="space-y-2 text-sm text-gray-700">
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Unlimited products</strong> tracking</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>15 competitor brands</strong> monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>All AI platforms</strong> (ChatGPT, Perplexity, Claude, Bing Chat, Gemini)</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>5,000 queries</strong> daily monitoring</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Advanced analytics</strong> and custom reports</span></li>
-                            </ul>
+                
+                <div class="feature-card bg-white rounded-2xl p-8 text-center border border-gray-200">
+                    <p class="text-xl text-gray-700 italic mb-6">"Виявили, чому конкуренти отримують згадки в ШІ замість нас"</p>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">С</div>
+                        <div class="text-left">
+                            <div class="font-semibold text-gray-900">Сергій</div>
+                            <div class="text-sm text-gray-600">Complimed</div>
                         </div>
-
-                        <div>
-                            <h4 class="font-semibold mb-3 text-blue-600">Advanced Features:</h4>
-                            <ul class="space-y-2 text-sm text-gray-700">
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Real-time Slack/email alerts</strong></span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>API access</strong> for custom integrations</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>White-label reporting</strong> for agencies</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Team collaboration</strong> tools</span></li>
-                                <li class="flex items-center space-x-2"><span class="text-green-500 font-bold">✓</span><span><strong>Priority support</strong> (Slack + Phone)</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <button class="w-full gradient-button hover:opacity-90 text-white py-3 rounded-lg font-semibold mt-8 transition-all shadow-md">
-                        Start Free Trial
-                    </button>
-                </div>
-            </div>
-
-            <!-- Add-ons -->
-            <div class="mt-12 text-center">
-                <h3 class="text-xl font-semibold mb-6 text-gray-900">Add-ons Available</h3>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                        <div class="font-semibold text-blue-600">Claude Pro monitoring</div>
-                        <div class="text-sm text-gray-600">+$49/month</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                        <div class="font-semibold text-blue-600">Additional query volume</div>
-                        <div class="text-sm text-gray-600">+$0.05/query beyond limits</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                        <div class="font-semibold text-blue-600">Custom competitive intelligence</div>
-                        <div class="text-sm text-gray-600">+$199/month</div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                        <div class="font-semibold text-blue-600">White-label dashboard</div>
-                        <div class="text-sm text-gray-600">+$299/month</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Trusted by SEO teams at leading brands</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">SC</div>
-                        <div>
-                            <div class="font-semibold text-gray-900">Sarah Chen</div>
-                            <div class="text-sm text-gray-600">Head of SEO at TechCorp</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"We discovered our flagship product wasn't being mentioned in 80% of relevant AI queries. Within a month of using ProductTracker AI, we identified exactly what was missing and saw a 40% increase in AI recommendations."</p>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">MR</div>
-                        <div>
-                            <div class="font-semibold text-gray-900">Mike Rodriguez</div>
-                            <div class="text-sm text-gray-600">SEO Director at RetailCo</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"The competitive analysis feature is a game-changer. We can see exactly which products our competitors are winning on and why AI systems prefer them."</p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">LP</div>
-                        <div>
-                            <div class="font-semibold text-gray-900">Lisa Park</div>
-                            <div class="text-sm text-gray-600">SEO Consultant at GrowthAgency</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Our client's product mentions in ChatGPT increased by 150% after we used the insights to optimize their product information. The ROI speaks for itself."</p>
-                </div>
-            </div>
-
-            <!-- Usage Stats -->
-            <div class="grid grid-cols-3 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-blue-600 animate-counter">500+</div>
-                    <div class="text-gray-600">SEO professionals tracking product visibility</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-blue-600 animate-counter">50K+</div>
-                    <div class="text-gray-600">products monitored daily across AI platforms</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-blue-600 animate-counter">2M+</div>
-                    <div class="text-gray-600">AI queries analyzed for product mentions</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h2>
-            </div>
-
-            <div class="space-y-4">
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">How is this different from brand monitoring tools?</h3>
-                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
-                        </div>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-700">We focus specifically on product and service visibility, not just brand mentions. You can track how individual SKUs, services, or product categories perform in AI recommendations.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">What counts as a "product mention"?</h3>
-                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
-                        </div>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-700">Any time your specific product name, model number, or service offering appears in an AI response to relevant queries. We track both direct recommendations and contextual mentions.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Can I track competitor products?</h3>
-                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
-                        </div>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-700">Yes, you can monitor up to 5-15 competitor brands (depending on plan) to see how their products compare to yours in AI search results.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Do you integrate with e-commerce platforms?</h3>
-                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
-                        </div>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-700">Yes, we integrate with Shopify, WooCommerce, Magento, and other major platforms to automatically import your product catalog.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <button class="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg" onclick="toggleFAQ(this)">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">How accurate is the tracking?</h3>
-                            <span class="text-gray-600 transform transition-transform duration-200">+</span>
-                        </div>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6">
-                        <p class="text-gray-700">We use advanced query simulation and multiple testing methodologies to achieve 95%+ accuracy in tracking product mentions across AI platforms.</p>
                     </div>
                 </div>
             </div>
@@ -936,71 +423,187 @@
     <!-- Final CTA Section -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900">Ready to see how your products perform in AI search?</h2>
-            <p class="text-xl text-gray-600 mb-8">Join 500+ SEO teams already tracking their product visibility in the future of search</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-900">Готові побачити, чи рекомендує ШІ ваші продукти?</h2>
             
-            <div class="mb-8">
-                <button class="gradient-button hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg text-white transition-all transform hover:scale-105 mr-4 mb-4 shadow-md">
-                    Start Your Free Trial Today
-                </button>
-                <button class="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-semibold text-lg transition-all mb-4 shadow-sm">
-                    Book a Demo
+            <div class="flex justify-center mb-8">
+                <button class="gradient-button hover:opacity-90 px-10 py-5 rounded-xl font-bold text-xl text-white transition-all transform hover:scale-105 shadow-lg">
+                    Спробувати безкоштовно - 10 запитів
                 </button>
             </div>
             
-            <p class="text-gray-500 mb-8">14 days free • Track 10 products • No credit card required</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-gray-600">
-                <div class="flex items-center space-x-2">
-                    <span>📧</span>
-                    <span>hello@producttracker.ai</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>💬</span>
-                    <span>Live Chat Available</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <span>📞</span>
-                    <span>Book a Demo</span>
-                </div>
-            </div>
+            <p class="text-gray-500 text-lg">Безкоштовна пробна версія • Результати за 60 секунд • Без кредитної картки</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-gray-100 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-xl font-bold gradient-text mb-4 md:mb-0">ProductTracker AI</div>
-                <div class="text-gray-600 text-sm">
-                    © 2025 ProductTracker AI. All rights reserved.
-                </div>
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-xl font-bold gradient-text mb-4">BoostMyGEO</div>
+            <div class="text-gray-600 text-sm">
+                © 2025 BoostMyGEO. Перевірте, чи рекомендує ШІ ваші продукти.
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            // Add mobile menu implementation
-            console.log('Mobile menu toggled');
-        }
-
-        // FAQ toggle
-        function toggleFAQ(button) {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('span');
+        // CSV Template Download
+        document.getElementById('downloadTemplate').addEventListener('click', function() {
+            const csvContent = `query
+бездротовий зарядний пристрій iphone
+usb-c хаб
+підставка для ноутбука
+чохол для телефону`;
             
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(45deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'keyword_template.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // File Upload Handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadContent = document.getElementById('uploadContent');
+        const fileInfo = document.getElementById('fileInfo');
+        const errorInfo = document.getElementById('errorInfo');
+        const uploadCTA = document.getElementById('uploadCTA');
+
+        // Click to select file
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
             }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            // Reset states
+            uploadContent.classList.add('hidden');
+            fileInfo.classList.add('hidden');
+            errorInfo.classList.add('hidden');
+
+            // Validate file
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                showError('Будь ласка, оберіть CSV файл');
+                return;
+            }
+
+            if (file.size > 1024 * 1024) { // 1MB
+                showError('Файл занадто великий. Максимум 1 МБ');
+                return;
+            }
+
+            // Show success
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = `(${(file.size / 1024).toFixed(1)} KB)`;
+            fileInfo.classList.remove('hidden');
+            uploadCTA.disabled = false;
+            
+            console.log(`uploaded keywords: ${file.name} (mock)`);
         }
 
-        // Smooth scrolling for navigation links
+        function showError(message) {
+            document.getElementById('errorMessage').textContent = message;
+            errorInfo.classList.remove('hidden');
+            uploadContent.classList.remove('hidden');
+            uploadCTA.disabled = true;
+        }
+
+        // Competitor Toggle
+        const competitorToggle = document.getElementById('competitorToggle');
+        const competitorInput = document.getElementById('competitorInput');
+        const competitorColumn = document.getElementById('competitorColumn');
+        const competitorCells = document.querySelectorAll('.competitor-cell');
+        const competitorMobile = document.querySelectorAll('.competitor-mobile');
+        const domainsInput = document.getElementById('competitorDomains');
+        const domainError = document.getElementById('domainError');
+
+        competitorToggle.addEventListener('change', function() {
+            const isChecked = this.checked;
+            const toggleBg = this.nextElementSibling.querySelector('div:first-child');
+            const toggleDot = this.nextElementSibling.querySelector('div:last-child');
+
+            if (isChecked) {
+                toggleBg.classList.remove('bg-gray-600');
+                toggleBg.classList.add('bg-blue-600');
+                toggleDot.classList.add('translate-x-6');
+                competitorInput.classList.remove('hidden');
+                competitorColumn.classList.remove('hidden');
+                competitorCells.forEach(cell => cell.classList.remove('hidden'));
+                competitorMobile.forEach(cell => cell.classList.remove('hidden'));
+            } else {
+                toggleBg.classList.add('bg-gray-600');
+                toggleBg.classList.remove('bg-blue-600');
+                toggleDot.classList.remove('translate-x-6');
+                competitorInput.classList.add('hidden');
+                competitorColumn.classList.add('hidden');
+                competitorCells.forEach(cell => cell.classList.add('hidden'));
+                competitorMobile.forEach(cell => cell.classList.add('hidden'));
+                domainError.classList.add('hidden');
+            }
+        });
+
+        // Domain validation
+        domainsInput.addEventListener('input', function() {
+            const domains = this.value.split(',').map(d => d.trim()).filter(d => d);
+            const domainRegex = /^[a-z0-9.-]+\.[a-z]{2,}$/i;
+            const invalidDomains = domains.filter(domain => !domainRegex.test(domain));
+
+            if (invalidDomains.length > 0 && this.value.trim()) {
+                domainError.classList.remove('hidden');
+            } else {
+                domainError.classList.add('hidden');
+            }
+        });
+
+        // Help triggers
+        document.querySelectorAll('.help-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                const helpId = this.getAttribute('data-help') + (window.innerWidth < 768 ? '-mobile' : '') + '-help';
+                const helpElement = document.getElementById(helpId);
+                
+                if (helpElement) {
+                    helpElement.classList.toggle('hidden');
+                }
+            });
+        });
+
+        // CTA Handlers
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('безкоштовно') || button.textContent.includes('звіт')) {
+                button.addEventListener('click', () => {
+                    console.log('CTA clicked - redirect to results');
+                });
+            }
+        });
+
+        // Smooth scrolling for any internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1014,7 +617,7 @@
             });
         });
 
-        // Add animation on scroll
+        // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1028,54 +631,8 @@
             });
         }, observerOptions);
 
-        // Observe elements for animation
-        document.querySelectorAll('.feature-card, .dashboard-card').forEach(el => {
+        document.querySelectorAll('.feature-card').forEach(el => {
             observer.observe(el);
-        });
-
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.animate-counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
-                const duration = 2000; // 2 seconds
-                const step = target / (duration / 16); // 60fps
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (counter.textContent.includes('+')) {
-                        counter.textContent = Math.floor(current) + '+';
-                    } else if (counter.textContent.includes('K+')) {
-                        counter.textContent = Math.floor(current) + 'K+';
-                    } else if (counter.textContent.includes('M+')) {
-                        counter.textContent = Math.floor(current) + 'M+';
-                    } else if (counter.textContent.includes('%')) {
-                        counter.textContent = Math.floor(current) + '%';
-                    } else {
-                        counter.textContent = Math.floor(current);
-                    }
-                }, 16);
-            });
-        }
-
-        // Trigger counter animation when stats section is visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.animate-counter').forEach(el => {
-            statsObserver.observe(el);
         });
     </script>
 </body>

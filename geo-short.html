@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductTracker AI - See if AI recommends your products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gray-50': '#f8fafc',
+                        'gray-100': '#f1f5f9',
+                        'gray-200': '#e2e8f0',
+                        'gray-600': '#475569',
+                        'gray-700': '#334155',
+                        'gray-800': '#1e293b',
+                        'gray-900': '#0f172a',
+                        'blue-500': '#3b82f6',
+                        'blue-600': '#2563eb',
+                        'green-500': '#10b981',
+                        'green-600': '#059669'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-button {
+            background: linear-gradient(45deg, #059669, #10b981);
+        }
+        .gradient-button-blue {
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-xl font-bold gradient-text">ProductTracker AI</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-gray-900 transition-colors font-medium">Watch Demo</button>
+                    <button class="gradient-button hover:opacity-90 px-4 py-2 rounded-lg font-semibold text-white transition-all shadow-sm">
+                        Try Free (10 Products)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="fade-in">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-gray-900 leading-tight">
+                    Are people finding your products when they ask AI for recommendations?
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    In 60 seconds, see which of your products AI actually recommends to customers.
+                </p>
+                
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+                    <button class="gradient-button hover:opacity-90 px-10 py-5 rounded-xl font-bold text-xl text-white transition-all transform hover:scale-105 shadow-lg">
+                        Try Free (10 Products)
+                    </button>
+                    <button class="bg-white border-2 border-gray-300 text-gray-800 hover:border-gray-400 hover:bg-gray-50 px-10 py-5 rounded-xl font-bold text-xl transition-all">
+                        Watch Demo
+                    </button>
+                </div>
+                
+                <p class="text-gray-500 text-lg">Free trial • No credit card • Instant results</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Dashboard Preview -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl p-8 md:p-12 shadow-xl border border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Your Products in AI Search</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                            <span class="font-semibold text-gray-900">iPhone Wireless Charger</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-green-600">87%</div>
+                            <div class="text-sm text-gray-600">recommended</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                            <span class="font-semibold text-gray-900">Laptop Stand</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-yellow-600">34%</div>
+                            <div class="text-sm text-gray-600">recommended</div>
+                            <button class="text-xs text-blue-600 hover:underline mt-1">Why so low?</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                            <span class="font-semibold text-gray-900">USB-C Hub</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-red-600">8%</div>
+                            <div class="text-sm text-gray-600">recommended</div>
+                            <button class="text-xs text-blue-600 hover:underline mt-1">Fix this</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                            <span class="font-semibold text-gray-900">Phone Case</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-green-600">91%</div>
+                            <div class="text-sm text-gray-600">recommended</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button class="gradient-button-blue hover:opacity-90 px-8 py-3 rounded-lg font-semibold text-white transition-all">
+                        See Full Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your customers ask AI: "What should I buy?"</h2>
+                <p class="text-2xl text-gray-600 max-w-3xl mx-auto">Is AI recommending YOUR products... or your competitors'?</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Customer asks ChatGPT</h3>
+                    <p class="text-gray-600">"What's the best wireless charger for iPhone?"</p>
+                </div>
+                
+                <div class="bg-red-50 rounded-2xl p-8 text-center border border-red-200">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">AI recommends 3 products</h3>
+                    <p class="text-red-600 font-medium">None are yours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- One Simple Answer Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">One simple answer</h2>
+            <p class="text-2xl text-gray-600 mb-16 max-w-3xl mx-auto">See exactly how visible each of your products is when customers ask AI for recommendations.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 hover-lift">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Connect your products</h3>
+                    <p class="text-gray-600">30 seconds</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 hover-lift">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">We check AI recommendations</h3>
+                    <p class="text-gray-600">Automatic</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 hover-lift">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">See your results</h3>
+                    <p class="text-gray-600">Instant</p>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <button class="gradient-button hover:opacity-90 px-10 py-5 rounded-xl font-bold text-xl text-white transition-all transform hover:scale-105 shadow-lg">
+                    Try Free (10 Products)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                    <p class="text-xl text-gray-700 italic mb-6">"Finally I know if my products are being recommended by AI"</p>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">S</div>
+                        <div class="text-left">
+                            <div class="font-semibold text-gray-900">Sarah</div>
+                            <div class="text-sm text-gray-600">Acme Corp</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                    <p class="text-xl text-gray-700 italic mb-6">"Discovered why competitors were getting AI mentions instead of us"</p>
+                    <div class="flex items-center justify-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold">M</div>
+                        <div class="text-left">
+                            <div class="font-semibold text-gray-900">Mike</div>
+                            <div class="text-sm text-gray-600">TechCo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Pricing -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Simple Pricing</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12">
+                <!-- Starter Plan -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-200 hover-lift">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Starter</h3>
+                        <div class="text-5xl font-bold text-gray-900 mb-2">$49<span class="text-xl text-gray-500">/month</span></div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Track 25 products</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">See AI recommendation rates</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Basic competitor insights</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Email reports</span>
+                        </li>
+                    </ul>
+
+                    <button class="w-full gradient-button hover:opacity-90 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-md">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="bg-white rounded-2xl p-8 border-2 border-blue-600 hover-lift relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="gradient-button-blue px-4 py-1 rounded-full text-sm font-bold text-white shadow-lg">Popular</span>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Professional</h3>
+                        <div class="text-5xl font-bold text-gray-900 mb-2">$99<span class="text-xl text-gray-500">/month</span></div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Track 100 products</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Advanced AI analytics</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Full competitor analysis</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">Priority support</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-green-500 font-bold text-lg">✓</span>
+                            <span class="text-gray-700">API access</span>
+                        </li>
+                    </ul>
+
+                    <button class="w-full gradient-button hover:opacity-90 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-md">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Free Trial CTA -->
+            <div class="text-center">
+                <p class="text-xl text-gray-600 mb-6">Try free with 10 products - No credit card needed</p>
+                <button class="gradient-button hover:opacity-90 px-12 py-5 rounded-xl font-bold text-xl text-white transition-all transform hover:scale-105 shadow-lg">
+                    Try Free - 10 Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-900">Ready to see if AI is recommending your products?</h2>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+                <button class="gradient-button hover:opacity-90 px-10 py-5 rounded-xl font-bold text-xl text-white transition-all transform hover:scale-105 shadow-lg">
+                    Try Free - 10 Products
+                </button>
+                <button class="bg-white border-2 border-gray-300 text-gray-800 hover:border-gray-400 hover:bg-gray-50 px-10 py-5 rounded-xl font-bold text-xl transition-all">
+                    Get Full Access
+                </button>
+            </div>
+            
+            <p class="text-gray-500 text-lg">Free trial • 60-second results • No credit card needed</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-xl font-bold gradient-text mb-4">ProductTracker AI</div>
+            <div class="text-gray-600 text-sm">
+                © 2025 ProductTracker AI. See if AI recommends your products.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for any internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add simple fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.hover-lift').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add click handlers for all CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Try Free')) {
+                button.addEventListener('click', () => {
+                    console.log('Free trial clicked - redirect to signup');
+                });
+            }
+            if (button.textContent.includes('Watch Demo')) {
+                button.addEventListener('click', () => {
+                    console.log('Demo clicked - open video modal');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
