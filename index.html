@@ -172,28 +172,6 @@
             <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-gray-200">
                 <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Ваші продукти або послуги в пошуку ШІ</h3>
                 
-                <!-- Competitor Toggle -->
-                <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                    <div class="flex items-center space-x-3 mb-4 sm:mb-0">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" id="competitorToggle" class="sr-only" role="switch">
-                            <div class="relative">
-                                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
-                                <div class="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform"></div>
-                            </div>
-                            <span class="ml-3 text-gray-900 font-medium">Порівнювати з конкурентами</span>
-                        </label>
-                    </div>
-                    
-                    <div id="competitorInput" class="hidden">
-                        <input type="text" 
-                               placeholder="competitor1.com, competitor2.com, ..." 
-                               class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                               id="competitorDomains">
-                        <div id="domainError" class="text-red-500 text-xs mt-1 hidden">Перевірте формат доменів (наприклад: example.com)</div>
-                    </div>
-                </div>
-
                 <!-- Desktop Table -->
                 <div class="hidden md:block overflow-x-auto">
                     <table class="w-full">
@@ -201,8 +179,7 @@
                             <tr class="border-b border-gray-200">
                                 <th class="text-left py-3 px-4 font-semibold text-gray-900">Запит</th>
                                 <th class="text-left py-3 px-4 font-semibold text-gray-900">Рекомендація ШІ</th>
-                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Причина</th>
-                                <th id="competitorColumn" class="text-left py-3 px-4 font-semibold text-gray-900 hidden">Конкурент</th>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-900">Конкуренти</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -210,17 +187,10 @@
                                 <td class="py-4 px-4 font-medium text-gray-900">Бездротовий зарядний пристрій iPhone</td>
                                 <td class="py-4 px-4">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Рекомендується
+                                        Рекомендується (4)
                                     </span>
                                 </td>
-                                <td class="py-4 px-4">
-                                    <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                        <svg class="w-4 h-4 inline" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                </td>
-                                <td class="py-4 px-4 text-gray-500 competitor-cell hidden">—</td>
+                                <td class="py-4 px-4 text-gray-700">competitor1.com, competitor2.com, competitor3.com</td>
                             </tr>
                             <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                 <td class="py-4 px-4 font-medium text-gray-900">Підставка для ноутбука</td>
@@ -229,17 +199,7 @@
                                         Не рекомендується
                                     </span>
                                 </td>
-                                <td class="py-4 px-4">
-                                    <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="laptop-stand">
-                                        Чому так мало?
-                                    </button>
-                                </td>
-                                <td class="py-4 px-4 text-gray-700 competitor-cell hidden">competitor1.com</td>
-                            </tr>
-                            <tr id="laptop-stand-help" class="hidden border-b border-gray-100 bg-blue-50">
-                                <td colspan="4" class="py-3 px-4 text-sm text-gray-700">
-                                    Низька релевантність опису продукту. ШІ шукає конкретні характеристики та користувацькі відгуки. Рекомендується оновити опис з технічними деталями.
-                                </td>
+                                <td class="py-4 px-4 text-gray-700">competitor4.com, competitor5.com</td>
                             </tr>
                             <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                 <td class="py-4 px-4 font-medium text-gray-900">USB-C хаб</td>
@@ -248,33 +208,16 @@
                                         Не рекомендується
                                     </span>
                                 </td>
-                                <td class="py-4 px-4">
-                                    <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="usb-hub">
-                                        Виправити це
-                                    </button>
-                                </td>
-                                <td class="py-4 px-4 text-gray-700 competitor-cell hidden">competitor2.com</td>
-                            </tr>
-                            <tr id="usb-hub-help" class="hidden border-b border-gray-100 bg-blue-50">
-                                <td colspan="4" class="py-3 px-4 text-sm text-gray-700">
-                                    Слабкі доменні сигнали та відсутність згадок у авторитетних джерелах. ШІ віддає перевагу продуктам з кращою онлайн-репутацією та відгуками.
-                                </td>
+                                <td class="py-4 px-4 text-gray-700">competitor6.com, competitor7.com, competitor8.com, competitor9.com</td>
                             </tr>
                             <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                 <td class="py-4 px-4 font-medium text-gray-900">Чохол для телефону</td>
                                 <td class="py-4 px-4">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Рекомендується
+                                        Рекомендується (1)
                                     </span>
                                 </td>
-                                <td class="py-4 px-4">
-                                    <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                        <svg class="w-4 h-4 inline" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                </td>
-                                <td class="py-4 px-4 text-gray-500 competitor-cell hidden">—</td>
+                                <td class="py-4 px-4 text-gray-700">competitor10.com, competitor11.com, competitor12.com</td>
                             </tr>
                         </tbody>
                     </table>
@@ -284,71 +227,43 @@
                 <div class="md:hidden space-y-4">
                     <div class="border border-gray-200 rounded-lg p-4">
                         <div class="font-medium text-gray-900 mb-2">Бездротовий зарядний пристрій iPhone</div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Рекомендується
+                                Рекомендується (4)
                             </span>
-                            <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
                         </div>
-                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: —</div>
+                        <div class="text-sm text-gray-600"><strong>Конкуренти:</strong> competitor1.com, competitor2.com, competitor3.com</div>
                     </div>
 
                     <div class="border border-gray-200 rounded-lg p-4">
                         <div class="font-medium text-gray-900 mb-2">Підставка для ноутбука</div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                 Не рекомендується
                             </span>
-                            <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="laptop-stand-mobile">
-                                Чому так мало?
-                            </button>
                         </div>
-                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: competitor1.com</div>
-                        <div id="laptop-stand-mobile-help" class="hidden mt-3 p-3 bg-blue-50 rounded text-sm text-gray-700">
-                            Низька релевантність опису продукту. ШІ шукає конкретні характеристики та користувацькі відгуки. Рекомендується оновити опис з технічними деталями.
-                        </div>
+                        <div class="text-sm text-gray-600"><strong>Конкуренти:</strong> competitor4.com, competitor5.com</div>
                     </div>
 
                     <div class="border border-gray-200 rounded-lg p-4">
                         <div class="font-medium text-gray-900 mb-2">USB-C хаб</div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                 Не рекомендується
                             </span>
-                            <button class="text-blue-600 hover:text-blue-800 text-sm underline help-trigger" data-help="usb-hub-mobile">
-                                Виправити це
-                            </button>
                         </div>
-                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: competitor2.com</div>
-                        <div id="usb-hub-mobile-help" class="hidden mt-3 p-3 bg-blue-50 rounded text-sm text-gray-700">
-                            Слабкі доменні сигнали та відсутність згадок у авторитетних джерелах. ШІ віддає перевагу продуктам з кращою онлайн-репутацією та відгуками.
-                        </div>
+                        <div class="text-sm text-gray-600"><strong>Конкуренти:</strong> competitor6.com, competitor7.com, competitor8.com, competitor9.com</div>
                     </div>
 
                     <div class="border border-gray-200 rounded-lg p-4">
                         <div class="font-medium text-gray-900 mb-2">Чохол для телефону</div>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Рекомендується
+                                Рекомендується (1)
                             </span>
-                            <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
                         </div>
-                        <div class="competitor-mobile hidden mt-2 text-sm text-gray-600">Конкурент: —</div>
+                        <div class="text-sm text-gray-600"><strong>Конкуренти:</strong> competitor10.com, competitor11.com, competitor12.com</div>
                     </div>
-                </div>
-                
-                <div class="text-center mt-8">
-                    <button class="gradient-button-blue hover:opacity-90 px-8 py-3 rounded-lg font-semibold text-white transition-all">
-                        Переглянути повний звіт
-                    </button>
                 </div>
             </div>
         </div>
@@ -358,8 +273,7 @@
     <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Ваші клієнти запитують у ШІ: "Що мені купити?"</h2>
-                <p class="text-2xl text-gray-600 max-w-3xl mx-auto">Чи рекомендує ШІ ВАШІ продукти... чи продукти ваших конкурентів?</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Чи рекомендує ШІ саме ВАШІ продукти/послуги чи продукти ваших конкурентів?</h2>
             </div>
             
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -529,69 +443,9 @@ usb-c хаб
             uploadCTA.disabled = true;
         }
 
-        // Competitor Toggle
-        const competitorToggle = document.getElementById('competitorToggle');
-        const competitorInput = document.getElementById('competitorInput');
-        const competitorColumn = document.getElementById('competitorColumn');
-        const competitorCells = document.querySelectorAll('.competitor-cell');
-        const competitorMobile = document.querySelectorAll('.competitor-mobile');
-        const domainsInput = document.getElementById('competitorDomains');
-        const domainError = document.getElementById('domainError');
-
-        competitorToggle.addEventListener('change', function() {
-            const isChecked = this.checked;
-            const toggleBg = this.nextElementSibling.querySelector('div:first-child');
-            const toggleDot = this.nextElementSibling.querySelector('div:last-child');
-
-            if (isChecked) {
-                toggleBg.classList.remove('bg-gray-600');
-                toggleBg.classList.add('bg-blue-600');
-                toggleDot.classList.add('translate-x-6');
-                competitorInput.classList.remove('hidden');
-                competitorColumn.classList.remove('hidden');
-                competitorCells.forEach(cell => cell.classList.remove('hidden'));
-                competitorMobile.forEach(cell => cell.classList.remove('hidden'));
-            } else {
-                toggleBg.classList.add('bg-gray-600');
-                toggleBg.classList.remove('bg-blue-600');
-                toggleDot.classList.remove('translate-x-6');
-                competitorInput.classList.add('hidden');
-                competitorColumn.classList.add('hidden');
-                competitorCells.forEach(cell => cell.classList.add('hidden'));
-                competitorMobile.forEach(cell => cell.classList.add('hidden'));
-                domainError.classList.add('hidden');
-            }
-        });
-
-        // Domain validation
-        domainsInput.addEventListener('input', function() {
-            const domains = this.value.split(',').map(d => d.trim()).filter(d => d);
-            const domainRegex = /^[a-z0-9.-]+\.[a-z]{2,}$/i;
-            const invalidDomains = domains.filter(domain => !domainRegex.test(domain));
-
-            if (invalidDomains.length > 0 && this.value.trim()) {
-                domainError.classList.remove('hidden');
-            } else {
-                domainError.classList.add('hidden');
-            }
-        });
-
-        // Help triggers
-        document.querySelectorAll('.help-trigger').forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
-                e.preventDefault();
-                const helpId = this.getAttribute('data-help') + (window.innerWidth < 768 ? '-mobile' : '') + '-help';
-                const helpElement = document.getElementById(helpId);
-                
-                if (helpElement) {
-                    helpElement.classList.toggle('hidden');
-                }
-            });
-        });
-
         // CTA Handlers
         document.querySelectorAll('button').forEach(button => {
-            if (button.textContent.includes('безкоштовно') || button.textContent.includes('звіт')) {
+            if (button.textContent.includes('безкоштовно')) {
                 button.addEventListener('click', () => {
                     console.log('CTA clicked - redirect to results');
                 });
